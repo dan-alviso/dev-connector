@@ -27,7 +27,7 @@ export const getCurrentProfile = () => dispatch => {
     );
 };
 
-// Create Profile
+// Create profile
 export const createProfile = (profileData, history) => dispatch => {
   axios
     .post("/api/profile", profileData)
@@ -40,10 +40,23 @@ export const createProfile = (profileData, history) => dispatch => {
     );
 };
 
-// Add Experience
+// Add experience
 export const addExperience = (expData, history) => dispatch => {
   axios
     .post("/api/profile/experience", expData)
+    .then(res => history.push("/dashboard"))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+// Add education
+export const addEducation = (eduData, history) => dispatch => {
+  axios
+    .post("/api/profile/education", eduData)
     .then(res => history.push("/dashboard"))
     .catch(err =>
       dispatch({
