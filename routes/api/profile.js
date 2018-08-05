@@ -271,7 +271,7 @@ router.delete(
         // Get remove index
         const removeIndex = profile.education
           .map(item => item.id)
-          .indexOf(req.params.exp_id);
+          .indexOf(req.params.edu_id);
 
         if (removeIndex === -1) {
           return res.status(404).json({
