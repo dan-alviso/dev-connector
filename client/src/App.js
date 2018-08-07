@@ -22,6 +22,7 @@ import AddExperience from "./components/add-credentials/AddExperience";
 import AddEducation from "./components/add-credentials/AddEducation";
 import Profiles from "./components/profiles/Profiles";
 import Profile from "./components/profile/Profile";
+import Posts from './components/posts/Posts';
 import NotFound from "./components/not-found/NotFound";
 
 import "./App.css";
@@ -77,6 +78,7 @@ class App extends Component {
                   path="/add-education"
                   component={AddEducation}
                 />
+                <PrivateRoute exact path="/feed" component={Posts} />
                 <Route exact path="/" component={Landing} />
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login} />
