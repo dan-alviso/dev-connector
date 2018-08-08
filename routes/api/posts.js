@@ -5,7 +5,6 @@ const passport = require("passport");
 
 // Post model
 const Post = require("../../models/Post");
-
 // Profile model
 const Profile = require("../../models/Profile");
 
@@ -24,7 +23,7 @@ router.get("/", (req, res) => {
   Post.find()
     .sort({ date: -1 })
     .then(posts => res.json(posts))
-    .catch(err => res.status(404).json({ nopostfound: "No posts found" }));
+    .catch(err => res.status(404).json({ nopostsfound: "No posts found" }));
 });
 
 // @route   GET api/posts/:id
@@ -100,9 +99,8 @@ router.post(
       Post.findById(req.params.id)
         .then(post => {
           if (
-            post.likes.filter(
-              like => like.user.toString() === req.user.id.length
-            ) > 0
+            post.likes.filter(like => like.user.toString() === req.user.id)
+              .length > 0
           ) {
             return res
               .status(400)
@@ -130,9 +128,8 @@ router.post(
       Post.findById(req.params.id)
         .then(post => {
           if (
-            post.likes.filter(
-              like => like.user.toString() === req.user.id.length
-            ) === 0
+            post.likes.filter(like => like.user.toString() === req.user.id)
+              .length === 0
           ) {
             return res
               .status(400)
